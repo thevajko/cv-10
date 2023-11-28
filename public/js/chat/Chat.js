@@ -43,13 +43,13 @@ class Chat {
                 document.getElementById("message").value,
                 document.getElementById("recipient").value
             );
-            // if message was sent, clear message and recipient input field
+            // If message was sent, clear message and recipient input field
             if (response === true) {
                 document.getElementById("message").value = "";
                 document.getElementById("recipient").value = "";
             } else {
-                // if not show notice
-                this.showNotice("Message cannot be send: there is error with server or recipient user is not active.");
+                // If not show notice
+                this.showNotice("The message can't be sent. The recipient might be not active or an error occurred.");
             }
         }
 
@@ -68,20 +68,20 @@ class Chat {
      * @returns {Promise<boolean>}
      */
     async showLoginOrLogout(showNotice = false) {
-        // get logged status bool
-        let logged = await this.#authService.loggedDetails();
+        // Get user status
+        let logged = await this.#authService.userStatus();
 
         if (logged == null) {
-            // user is not logged, hide all except login form
+            // User is not logged, hide everything except login form
             document.getElementById("user-logged").style.display = "none";
             document.getElementById("user-not-logged").style.display = "block";
             document.getElementById("chat").style.display = "none";
             document.getElementById("active").style.display = "none";
         } else {
-            // user is logged, show chat UI and hide login form
-            let loginElemelent = document.getElementById("user-logged");
-            loginElemelent.style.display = "block";
-            loginElemelent.querySelector("span").innerText = logged;
+            // User is logged, show chat UI and hide login form
+            let loginElement = document.getElementById("user-logged");
+            loginElement.style.display = "block";
+            loginElement.querySelector("span").innerText = logged;
             document.getElementById("user-not-logged").style.display = "none";
             document.getElementById("chat").style.display = "block";
             document.getElementById("active").style.display = "block";
