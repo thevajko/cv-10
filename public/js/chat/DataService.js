@@ -1,5 +1,5 @@
 /**
- * This is the class containing all methods for web API calling.
+ * Class contains methods for calling web API
  */
 class DataService {
 
@@ -36,7 +36,7 @@ class DataService {
      * @param onErrorReturn If there will be an error in request processing, return this value
      * @returns {Promise<any|any>} Return Promise, because this method uses fetch method
      */
-    async sendRequest(action, method , responseCode, body, onErrorReturn = null) {
+    async sendRequest(action, method, responseCode, body, onErrorReturn = null) {
         // Use exceptions to wrap the fetch call
         try {
             // Bild up fetch and wait for response
