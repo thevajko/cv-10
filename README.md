@@ -11,7 +11,7 @@ Vytvorte SPA aplikáciu na četovanie medzi používateľmi. Aplikácia bude dos
 3. Vašou úlohou bude implementovať chýbajúce metódy v JS triedach `DataService`, `MessagesAPI` a `Chat`.
    1. Začnite metódou `sendRequest()` v triede `DataService`. Jej úlohou je komunikovať s backend časťou aplikácie. Metóda bude slúžiť na získavanie dát, ale aj na posielanie dát na server. Aké HTML5 API na to môžeme využiť?
    2. Prezrite si, ako sa táto metóda využíva v triede `AuthAPI`. Podobným spôsobom implementujte chýbajúce metódy v triede `MessagesAPI`.
-   3. Implementujte metódu `getActiveUsers()` v triede `Chat`. Úlohou metódy bude získavať zoznam aktívnych používateľov zo backendu, aby ste vedeli, ktorým používateľom môžete poslať privátnu správu. Používateľov vložte do pripraveného elementu s id `active`. Po kliknutí na meno používateľa sa jeho meno prekopíruje do poľa adresáta správy a umožní poslať mu privátnu správu.
+   3. Implementujte metódu `getActiveUsers()` v triede `Chat`. Úlohou metódy bude získavať zoznam aktívnych používateľov z backendu, aby ste vedeli, ktorým používateľom môžete poslať privátnu správu. Používateľov vložte do pripraveného elementu s id `active`. Po kliknutí na meno používateľa sa jeho meno prekopíruje do poľa adresáta správy a umožní poslať mu privátnu správu.
    4. Implementujte metódu `getMessages()` v triede `Chat`. Metóda získa všetky správy četu a zobrazí ich v elemente s id `message_rows`. Každá správa bude predstavovať jeden riadok tabuľky, skladajúci sa zo stĺpcov dátum a čas, adresát a text správy. Ak je správa privátna, zobrazí sa celý riadok s iným farebným pozadím.
 
 ## Ako nájdem vetvu môjho cvičenia?
