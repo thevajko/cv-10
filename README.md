@@ -1,4 +1,4 @@
-VAII Cvičenie 09
+VAII Cvičenie 10
 
 Momentálne je otvorená vetva __MAIN__, ktorá obsahuje _štartér_. Riešenie obsahuje vetva __SOLUTION__.
 
