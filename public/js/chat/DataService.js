@@ -4,7 +4,7 @@
 class DataService {
 
     /**
-     * Base url of out web API
+     * Base url of the web API
      * @type {string}
      */
     #url = "http://localhost"

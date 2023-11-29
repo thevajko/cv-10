@@ -135,7 +135,7 @@ class Chat {
         // Get all messages
         let messages = await this.#messageService.getMessages();
         // Get an element where to put all messages
-        let messageElement = document.getElementById("messages");
+        let tbodyElement = document.getElementById("message_rows");
         // stringHTML will contain a HTML code of all messages
         let stringHTML = "";
 
@@ -151,7 +151,7 @@ class Chat {
             // Set the author and the recipient (if the message is private)
             let to = isPrivate ? message.author + " => " + message.recipient : message.author;
             // Set the CSS class to highlight line with private message
-            let privateClass = isPrivate ? "table-warning" : "";
+            let privateClass = isPrivate ? "table-primary" : "";
             // One message per table row
             stringHTML += `
                 <tr class="${privateClass}">
@@ -162,10 +162,7 @@ class Chat {
                 `
         });
         // Wrap messages to the table with a header
-        messageElement.innerHTML = "<table class=\"table table-sm table-bordered\">" +
-            "<tr><th>Date and time</th><th>From (=>to)</th><th>Message</th></tr>" +
-            stringHTML +
-            "</table>";
+        tbodyElement.innerHTML = stringHTML;
     }
 
     /**
