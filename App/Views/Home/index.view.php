@@ -19,7 +19,19 @@
                 <button id="btn-send">Send</button>
             </div>
             <h3>Messages:</h3>
-            <div id="messages"></div>
+            <div id="messages">
+                <table class="table table-sm table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Date and time</th>
+                        <th>From (=>to)</th>
+                        <th>Message</th>
+                    </tr>
+                    </thead>
+                    <tbody id="message_rows">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
