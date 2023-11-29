@@ -16,7 +16,7 @@ Vytvorte SPA aplikáciu na četovanie medzi používateľmi. Aplikácia bude dos
 
 ## Ako nájdem vetvu môjho cvičenia?
 
-Pokiaľ sa chcete dostať k postupu riešenia cvičenia je potrebné otvoriť si príslušnú _vetvu_, ktorej názov sa skladá:
+Pokiaľ sa chcete dostať k postupu riešenia cvičenia, je potrebné otvoriť si príslušnú _vetvu_, ktorej názov sa skladá:
 
 __MIESTNOST__ + "-" + __HODINA ZAČIATKU__ + "-" + __DEN__
 
