@@ -125,7 +125,17 @@ class Chat {
      * @returns {Promise<void>}
      */
     async getActiveUsers() {
-        // TODO Implement this method
+        let users = await this.#authService.getActiveUsers()
+        let ul = document.querySelector("#active ul")
+        ul.innerHTML = ""
+        users.forEach((user) => {
+            let li = document.createElement("li")
+            li.innerText = user.login
+            li.onclick = () => {
+                document.getElementById("recipient").value = user.login
+            }
+            ul.append(li)
+        })
     }
 
     /**
