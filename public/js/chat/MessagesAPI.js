@@ -11,7 +11,7 @@ class MessagesAPI extends DataService {
 
     /**
      * Get all messages for the user
-     * @param {string|number|null} lastID
+     * @param {string|number|null} lastID id of the last downloaded message, currently not used
      * @returns {Promise<Array<Object>>}
      */
     async getMessages(lastID = null) {
