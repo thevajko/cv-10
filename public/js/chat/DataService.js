@@ -23,7 +23,7 @@ class DataService {
      * @param {string} action
      * @returns {string} URL
      */
-    baseUrl(action){
+    baseUrl(action) {
         return this.#url + "?c=" + this.#controller + "&a=" + action;
     }
 
@@ -36,8 +36,25 @@ class DataService {
      * @param onErrorReturn If there will be an error in request processing, return this value
      * @returns {Promise<any|any>} Return Promise, because this method uses fetch method
      */
-    async sendRequest(action, method , responseCode, body, onErrorReturn = null) {
-        // TODO Implement this method
+    async sendRequest(action, method, responseCode, body, onErrorReturn = null) {
+        try {
+            let response = await fetch(
+                this.baseUrl(action), {
+                    method: method,
+                    body: JSON.stringify(body),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    }
+                });
+            if (response.status !== responseCode) return onErrorReturn;
+
+            if (response.status === 204) return true;
+
+            return await response.json();
+        } catch (ex) {
+            return onErrorReturn;
+        }
     }
 }
 
