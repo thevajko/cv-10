@@ -133,7 +133,12 @@ class Chat {
      * @returns {Promise}
      */
     async getMessages() {
-        // TODO Implement this method
+        let messages = this.#messageService.getMessages()
+        let s = "";
+        (await messages).forEach((message) => {
+         s +=  `<tr class="${message.recipient != null ? "table-success": ""}"><td>${message.created}</td><td>${message.author} => ${message.recipient}</td><td>${message.message}</td></tr>`
+        })
+        document.getElementById('message_rows').innerHTML = s;
     }
 }
 
