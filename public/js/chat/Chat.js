@@ -119,8 +119,6 @@ class Chat {
                     // By clicking login in the active user list copy the name to recipient input field
                     document.getElementById("recipient").value = user.login;
                 }
-                // Change cursor style to notify user
-                li.style.cursor = "pointer";
                 // Append a new list item
                 ulElement.append(li);
             });
