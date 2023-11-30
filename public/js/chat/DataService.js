@@ -37,24 +37,7 @@ class DataService {
      * @returns {Promise<any|any>} Return Promise, because this method uses fetch method
      */
     async sendRequest(action, method, responseCode, body, onErrorReturn = null) {
-        try {
-            let response = await fetch(
-                this.baseUrl(action), {
-                    method: method,
-                    body: JSON.stringify(body),
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json",
-                    }
-                });
-            if (response.status !== responseCode) return onErrorReturn;
-
-            if (response.status === 204) return true;
-
-            return await response.json();
-        } catch (ex) {
-            return onErrorReturn;
-        }
+        // TODO Implement this method
     }
 }
 
