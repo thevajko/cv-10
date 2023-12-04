@@ -17,7 +17,7 @@ class MessagesAPI extends DataService {
     async getMessages(lastID = null) {
         return await this.sendRequest(
             "getMessages&lastId="+lastID,
-            "GET",
+            "POST",
             200,
             {},
             []

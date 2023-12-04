@@ -144,7 +144,18 @@ class Chat {
      * @returns {Promise}
      */
     async getMessages() {
-        // TODO Implement this method
+        let messages = await this.#messageService.getMessages();
+        let table = document.getElementById("message_rows");
+        table.innerHTML = "";
+        for (let message of messages) {
+            let row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${message.created}</td>
+                <td>${message.author} ${(message.recipient != null ? " => ("+ message.recipient +")" : "")}</td>
+                <td>${message.message}</td>
+            `;
+            table.appendChild(row);
+        }
     }
 }
 
