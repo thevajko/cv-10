@@ -15,7 +15,13 @@ class MessagesAPI extends DataService {
      * @returns {Promise<Array<Object>>}
      */
     async getMessages(lastID = null) {
-        // TODO Implement this method
+        return await this.sendRequest(
+            "getMessages&lastId="+lastID,
+            "GET",
+            200,
+            {},
+            []
+        );
     }
 
     /**
@@ -25,7 +31,16 @@ class MessagesAPI extends DataService {
      * @returns {Promise<boolean>} true if message was sent
      */
     async sendMessage(message, recipient = null) {
-        // TODO Implement this method
+        return await this.sendRequest(
+            "sendMessage",
+            "POST",
+            204,
+            {
+                message: message,
+                recipient: recipient
+            },
+            false
+        )
     }
 }
 
