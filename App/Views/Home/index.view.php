@@ -7,7 +7,7 @@
     <div id="notices"></div>
     <div class="row">
         <div class="col-2">
-            <div id="active" class="d-none">
+            <div id="active" style="display: none">
                 <h3>Online users:</h3>
                 <ul></ul>
             </div>

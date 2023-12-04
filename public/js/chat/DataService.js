@@ -50,6 +50,10 @@ class DataService {
                 return onErrorReturn;
             }
 
+            if (response.status === 204) {
+                return true;
+            }
+
             return response.json();
         }
         catch (Exception) {
