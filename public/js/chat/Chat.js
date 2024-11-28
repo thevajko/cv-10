@@ -10,6 +10,7 @@ class Chat {
      * API for authentication
      * @type {AuthAPI}
      */
+
     #authService;
     /**
      * API for sending and receiving messages
@@ -17,10 +18,18 @@ class Chat {
      */
     #messageService;
 
+    /**
+     * Id of the last message, we have in a chat
+     * @type {number}
+     */
+    #lastId = 0;
+
     constructor(elementId) {
 
         this.#authService = new AuthAPI();
         this.#messageService = new MessagesAPI();
+
+        document.getElementById("message_rows").innerHTML = ""
 
         // Add handler for 'Login' button
         document.getElementById("btn-login").onclick = async () => {
@@ -131,7 +140,7 @@ class Chat {
      */
     async getMessages() {
         // Get all messages
-        let messages = await this.#messageService.getMessages();
+        let messages = await this.#messageService.getMessages(this.#lastId);
         // Get an element where to put all messages
         let tbodyElement = document.getElementById("message_rows");
         // stringHTML will contain a HTML code of all messages
@@ -144,6 +153,8 @@ class Chat {
         messages.forEach((message) => {
             // Get a date object
             let date = Date.parse(message.created);
+            // Remember last id
+            this.#lastId = message.id;
             // Is the message private?
             let isPrivate = message.recipient != null;
             // Set the author and the recipient (if the message is private)
@@ -160,7 +171,7 @@ class Chat {
                 `
         });
         // Wrap messages to the table with a header
-        tbodyElement.innerHTML = stringHTML;
+        tbodyElement.innerHTML += stringHTML;
     }
 
     /**
