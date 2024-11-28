@@ -76,7 +76,7 @@ class Chat {
      */
     async checkChanges() {
         if (await this.showLoginOrLogout()) { // check if user is logged in
-            await this.getMessages(); //  get all messages
+            await this.getMessages(this.#lastId); //  get all messages
             await this.getActiveUsers(); // get list of active users
         }
     }

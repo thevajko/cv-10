@@ -40,5 +40,4 @@ class DataService {
         // TODO Implement this method
     }
 }
-
 export {DataService}
