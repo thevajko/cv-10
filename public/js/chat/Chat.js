@@ -11,17 +11,26 @@ class Chat {
      * @type {AuthAPI}
      */
     #authService;
+    
     /**
      * API for sending and receiving messages
      * @type {MessagesAPI}
      */
     #messageService;
 
+        /**
+     * Id of the last message, we have in a chat 
+     * @type {number}
+     */
+    #lastId = 0;
+    
     constructor(elementId) {
 
         this.#authService = new AuthAPI();
         this.#messageService = new MessagesAPI();
 
+        document.getElementById("message_rows").innerHTML = ""
+        
         // Add handler for 'Login' button
         document.getElementById("btn-login").onclick = async () => {
             await this.#authService.login(
