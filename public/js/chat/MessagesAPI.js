@@ -15,7 +15,13 @@ class MessagesAPI extends DataService {
      * @returns {Promise<Array<Object>>}
      */
     async getMessages(lastID = null) {
-        // TODO Implement this method
+        let lastIdString = lastID == null ? "" : "&lastId=" + lastID;
+        return await this.sendRequest(
+            "getMessages" + lastIdString,
+            "POST",
+            200,
+            null,
+            []);
     }
 
     /**

@@ -134,7 +134,29 @@ class Chat {
      * @returns {Promise<void>}
      */
     async getActiveUsers() {
-        // TODO Implement this method
+        // Get list of all active users
+        let active = await this.#authService.getActiveUsers();
+        // Get an element where the list will be created
+        let ulElement = document.getElementById("active").querySelector("ul");
+        // Remove all previous content
+        ulElement.innerHTML = "";
+
+        if (active.length > 0) {
+            // If there are active users, iterate them
+            active.forEach((user) => {
+                // For each user, create a LI element
+                let li = document.createElement("li");
+                // Show user login
+                li.innerText = user.login;
+                // Add onclick handler
+                li.onclick = () => {
+                    // By clicking login in the active user list copy the name to recipient input field
+                    document.getElementById("recipient").value = user.login;
+                }
+                // Append a new list item
+                ulElement.append(li);
+            });
+        }
     }
 
     /**
@@ -142,7 +164,28 @@ class Chat {
      * @returns {Promise}
      */
     async getMessages() {
-        // TODO Implement this method
+        let messages = await this.#messageService.getMessages(this.#lastId);
+        let tbodyElement = document.getElementById("message_rows");
+        let stringHTML = "";
+
+        let formatter = new Intl.DateTimeFormat('sk-SK', {dateStyle: 'short', timeStyle: 'medium'});
+
+        messages.forEach((message) => {
+            let date = Date.parse(message.created);
+            this.#lastId = message.id;
+            let isPrivate = message.recipient != null;
+            let to = isPrivate ? message.author + " => " + message.recipient : message.author;
+            let privateClass = isPrivate ? "table-primary" : "";
+            // One message per table row
+            stringHTML += `
+                <tr class="${privateClass}">
+                    <td style="width:15%">${formatter.format(date)}</td>
+                    <td style="width:15%">${to}</td>
+                    <td>${message.message}</td>
+                </tr>
+                `
+        });
+        tbodyElement.innerHTML = stringHTML + tbodyElement.innerHTML ;
     }
 }
 
