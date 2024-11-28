@@ -97,7 +97,7 @@ class MessageApiController extends AControllerBase
 
 
         // get all messages, where user is the recipient or the author
-        $messages = Message::getAll("id >= ? AND (recipient is NULL OR recipient = ? OR author = ?)", [
+        $messages = Message::getAll("id > ? AND (recipient is NULL OR recipient = ? OR author = ?)", [
             $lastId,
             $this->app->getAuth()->getLoggedUserId(),
             $this->app->getAuth()->getLoggedUserId()
