@@ -7,7 +7,7 @@ class DataService {
      * Base url of the web API
      * @type {string}
      */
-    #url = "http://localhost"
+    #baseUrl = "http://localhost"
     /**
      * Prefix of target controller
      * @type {string}
@@ -23,8 +23,8 @@ class DataService {
      * @param {string} action
      * @returns {string} URL
      */
-    baseUrl(action) {
-        return this.#url + "?c=" + this.#controller + "&a=" + action;
+    #url(action) {
+        return this.#baseUrl + "?c=" + this.#controller + "&a=" + action;
     }
 
     /**
@@ -33,7 +33,7 @@ class DataService {
      * @param {string} method HTTP method (POST, GET etc.)
      * @param {number|string} responseCode Expected HTTP response code
      * @param {object} body  Parameters to be sent to the action
-     * @param onErrorReturn If there will be an error in request processing, return this value
+     * @param onErrorReturn If there is an error, return this value
      * @returns {Promise<any|any>} Return Promise, because this method uses fetch method
      */
     async sendRequest(action, method, responseCode, body, onErrorReturn = null) {
