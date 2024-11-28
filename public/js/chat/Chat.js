@@ -171,7 +171,8 @@ class Chat {
                 `
         });
         // Wrap messages to the table with a header
-        tbodyElement.innerHTML += stringHTML;
+
+        tbodyElement.innerHTML = stringHTML + tbodyElement.innerHTML ;
     }
 
     /**

@@ -101,12 +101,7 @@ class MessageApiController extends AControllerBase
             $lastId,
             $this->app->getAuth()->getLoggedUserId(),
             $this->app->getAuth()->getLoggedUserId()
-        ]);
-
-        // update datetime of last action for the author
-        $author = Login::getOne($this->app->getAuth()->getLoggedUserName());
-        $author->setLastAction(new \DateTime());
-        $author->save();
+        ], 'id DESC');
 
         return $this->json($messages); // send messages to the client
     }
