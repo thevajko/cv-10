@@ -76,8 +76,8 @@ class Chat {
      */
     async checkChanges() {
         if (await this.showLoginOrLogout()) { // check if user is logged in
-            await this.getMessages(); //  get all messages
-            await this.getActiveUsers(); // get list of active users
+            await this.showMessages(); //  show all messages
+            await this.showActiveUsers(); // show list of active users
         }
     }
 
@@ -133,15 +133,28 @@ class Chat {
      * Get and show active users
      * @returns {Promise<void>}
      */
-    async getActiveUsers() {
-        // TODO Implement this method
+    async showActiveUsers() {
+        let active = await this.#authService.getActiveUsers();
+        let ulElement = document.getElementById("active").querySelector("ul");
+        ulElement.innerHTML = "";
+
+        if (active.length > 0) {
+            active.forEach((user) => {
+                let li = document.createElement("li");
+                li.innerText = user.login;
+                li.onclick = () => {
+                    document.getElementById("recipient").value = user.login;
+                }
+                ulElement.append(li);
+            });
+        }
     }
 
     /**
      * Get all messages for the user
      * @returns {Promise}
      */
-    async getMessages() {
+    async showMessages() {
         // TODO Implement this method
     }
 }
