@@ -7,7 +7,7 @@ class DataService {
      * Base url of the web API
      * @type {string}
      */
-    #baseUrl = "http://localhost"
+    #baseUrl = "http://localhost/"
     /**
      * Prefix of target controller
      * @type {string}
@@ -37,7 +37,26 @@ class DataService {
      * @returns {Promise<any|any>} Return Promise, because this method uses fetch method
      */
     async sendRequest(action, method, responseCode, body, onErrorReturn = null) {
-        // TODO Implement this method
+        try {
+            let response = await fetch(
+                this.#url(action),
+                {
+                    method: method,
+                    body: JSON.stringify(body),
+                    headers: {
+                        "Content-type": "application/json",
+                        "Accept": "application/json",
+                    }
+                });
+            if (response.status !== responseCode) return onErrorReturn;
+
+            if (response.status === 204) return true;
+
+            return await response.json();
+        } catch (ex) {
+            return onErrorReturn;
+        }
     }
 }
+
 export {DataService}
