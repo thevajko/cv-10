@@ -105,10 +105,21 @@ class Chat {
     }
 
     /**
+     * Check for changes and change UI
+     * @returns {Promise<void>}
+     */
+    async checkChanges() {
+        if (await this.showLoginOrLogout()) { // check if user is logged in
+            await this.showMessages(); //  get all messages
+            await this.showActiveUsers(); // get list of active users
+        }
+    }
+
+    /**
      * Gets and show active users
      * @returns {Promise<void>}
      */
-    async getActiveUsers() {
+    async showActiveUsers() {
         // Get list of all active users
         let active = await this.#authService.getActiveUsers();
         // Get an element where the list will be created
@@ -138,7 +149,7 @@ class Chat {
      * Get all messages for the user
      * @returns {Promise}
      */
-    async getMessages() {
+    async showMessages() {
         // Get all messages
         let messages = await this.#messageService.getMessages(this.#lastId);
         // Get an element where to put all messages
@@ -173,17 +184,6 @@ class Chat {
         // Wrap messages to the table with a header
 
         tbodyElement.innerHTML = stringHTML + tbodyElement.innerHTML ;
-    }
-
-    /**
-     * Check for changes and change UI
-     * @returns {Promise<void>}
-     */
-    async checkChanges() {
-        if (await this.showLoginOrLogout()) { // check if user is logged in
-            await this.getMessages(); //  get all messages
-            await this.getActiveUsers(); // get list of active users
-        }
     }
 
     /**
