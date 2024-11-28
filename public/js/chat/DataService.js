@@ -7,7 +7,7 @@ class DataService {
      * Base url of the web API
      * @type {string}
      */
-    #url = "http://localhost"
+    #baseUrl = "http://localhost/"
     /**
      * Prefix of target controller
      * @type {string}
@@ -23,8 +23,8 @@ class DataService {
      * @param {string} action
      * @returns {string} URL
      */
-    baseUrl(action){
-        return this.#url + "?c=" + this.#controller + "&a=" + action;
+    #url(action){
+        return this.#baseUrl + "?c=" + this.#controller + "&a=" + action;
     }
 
     /**
@@ -41,7 +41,7 @@ class DataService {
         try {
             // Bild up fetch and wait for response
             let response = await fetch(
-                this.baseUrl(action), // URL to the action
+                this.#url(action), // URL to the action
                 {
                     method: method,
                     body: JSON.stringify(body),
