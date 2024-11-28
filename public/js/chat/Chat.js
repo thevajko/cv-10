@@ -10,27 +10,27 @@ class Chat {
      * API for authentication
      * @type {AuthAPI}
      */
+
     #authService;
-    
     /**
      * API for sending and receiving messages
      * @type {MessagesAPI}
      */
     #messageService;
 
-        /**
-     * Id of the last message, we have in a chat 
+    /**
+     * Id of the last message, we have in a chat
      * @type {number}
      */
     #lastId = 0;
-    
+
     constructor(elementId) {
 
         this.#authService = new AuthAPI();
         this.#messageService = new MessagesAPI();
 
         document.getElementById("message_rows").innerHTML = ""
-        
+
         // Add handler for 'Login' button
         document.getElementById("btn-login").onclick = async () => {
             await this.#authService.login(
@@ -58,7 +58,7 @@ class Chat {
                 document.getElementById("recipient").value = "";
             } else {
                 // If not show notice
-                this.showNotice("The message can't be sent. The recipient might be not active or an error occurred.");
+                this.showNotice("The message can't be sent. The recipient might be not active or an error occurred.", 'danger');
             }
         }
 
@@ -71,36 +71,26 @@ class Chat {
     }
 
     /**
-     * Check for changes and change UI
-     * @returns {Promise<void>}
-     */
-    async checkChanges() {
-        if (await this.showLoginOrLogout()) { // check if user is logged in
-            await this.showMessages(); //  show all messages
-            await this.showActiveUsers(); // show list of active users
-        }
-    }
-
-    /**
-     * Check current user status and show or hide login form
+     * Check current session status and according to it, it will change visibility of
+     * UI.
      * @param showNotice used to shoe notice, if this method is called using login button
      * @returns {Promise<boolean>}
      */
     async showLoginOrLogout(showNotice = false) {
-        // get logged status bool
-        let logged = await this.#authService.loggedDetails();
+        // Get user status
+        let logged = await this.#authService.userStatus();
 
         if (logged == null) {
-            // user is not logged, hide all except login form
+            // User is not logged, hide everything except login form
             document.getElementById("user-logged").style.display = "none";
             document.getElementById("user-not-logged").style.display = "block";
             document.getElementById("chat").style.display = "none";
             document.getElementById("active").style.display = "none";
         } else {
-            // user is logged, show chat UI and hide login form
-            let loginElemelent = document.getElementById("user-logged");
-            loginElemelent.style.display = "block";
-            loginElemelent.querySelector("span").innerText = logged;
+            // User is logged, show chat UI and hide login form
+            let loginElement = document.getElementById("user-logged");
+            loginElement.style.display = "block";
+            loginElement.querySelector("span").innerText = logged;
             document.getElementById("user-not-logged").style.display = "none";
             document.getElementById("chat").style.display = "block";
             document.getElementById("active").style.display = "block";
@@ -115,10 +105,52 @@ class Chat {
     }
 
     /**
+     * Check for changes and change UI
+     * @returns {Promise<void>}
+     */
+    async checkChanges() {
+        if (await this.showLoginOrLogout()) { // check if user is logged in
+            await this.showMessages(); //  get all messages
+            await this.showActiveUsers(); // get list of active users
+        }
+    }
+
+    /**
+     * Gets and show active users
+     * @returns {Promise<void>}
+     */
+    async showActiveUsers() {
+        // Get list of all active users
+        let active = await this.#authService.getActiveUsers();
+        // Get an element where the list will be created
+        let ulElement = document.getElementById("active").querySelector("ul");
+        // Remove all previous content
+        ulElement.innerHTML = "";
+
+        if (active.length > 0) {
+            // If there are active users, iterate them
+            active.forEach((user) => {
+                // For each user, create a LI element
+                let li = document.createElement("li");
+                // Show user login
+                li.innerText = user.login;
+                // Add onclick handler
+                li.onclick = () => {
+                    // By clicking login in the active user list copy the name to recipient input field
+                    document.getElementById("recipient").value = user.login;
+                }
+                // Append a new list item
+                ulElement.append(li);
+            });
+        }
+    }
+
+    /**
      * Show a notice
      * @param {string} message
+     * @param type type of the alert
      */
-    showNotice(message, type='alert') {
+    showNotice(message, type = 'alert') {
         // Get an element for notices
         let noticesElement = document.getElementById("notices");
         // Add a new notice at the top of the notices stack
@@ -129,34 +161,13 @@ class Chat {
              </div>` + noticesElement.innerHTML;
     }
 
-    /**
-     * Get and show active users
-     * @returns {Promise<void>}
-     */
-    async showActiveUsers() {
-        let active = await this.#authService.getActiveUsers();
-        let ulElement = document.getElementById("active").querySelector("ul");
-        ulElement.innerHTML = "";
-
-        if (active.length > 0) {
-            active.forEach((user) => {
-                let li = document.createElement("li");
-                li.innerText = user.login;
-                li.onclick = () => {
-                    document.getElementById("recipient").value = user.login;
-                }
-                ulElement.append(li);
-            });
-        }
-    }
-
-    /**
-     * Get all messages for the user
+        /**
+     * Show messages 
      * @returns {Promise}
      */
-    async showMessages() {
-        // TODO Implement this method
-    }
+        async showMessages() {
+            // TODO Implement this method
+        }
 }
 
 export {Chat}

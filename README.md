@@ -31,7 +31,7 @@ adresátovi a navyše len tomu, ktorý je aktívny (vykonal nejakú činnosť za
        elementu s id `active`. Po kliknutí na meno používateľa sa jeho meno prekopíruje do poľa adresáta správy a umožní
        poslať mu privátnu správu.
     4. Implementujte metódu `showMessages()` v triede `Chat`. Metóda získa všetky nové správy četu a zobrazí ich v
-       elemente s id `message_rows`. Každá správa bude  predstavovať jeden riadok tabuľky, skladajúci sa zo stĺpcov 
+       elemente s id `message_rows`. Každá správa bude predstavovať jeden riadok tabuľky, skladajúci sa zo stĺpcov 
        dátum a čas, adresát a text správy. Ak je správa privátna, zobrazí sa celý riadok s iným farebným pozadím.
 
 ## Ako nájdem vetvu môjho cvičenia?

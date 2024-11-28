@@ -48,7 +48,7 @@ class MessageApiController extends AControllerBase
      * @throws HTTPException 400 Bad Request if input has bad format or private message is sent to unactive user
      * @throws \JsonException
      */
-    public function sendMessage(): Response
+    public function saveMessage(): Response
     {
         // parse input JSON
         $jsonData = $this->app->getRequest()->getRawBodyJSON();
@@ -77,6 +77,9 @@ class MessageApiController extends AControllerBase
             $message->setMessage($jsonData->message);
             $message->save();
 
+            // User sent a message, so set users as active
+            Login::setActive($this->app->getAuth()->getLoggedUserName());
+
             // there is no data to be sent to the client
             return new EmptyResponse();
         }
@@ -101,7 +104,7 @@ class MessageApiController extends AControllerBase
             $lastId,
             $this->app->getAuth()->getLoggedUserId(),
             $this->app->getAuth()->getLoggedUserId()
-        ]);
+        ], 'id DESC');
 
         return $this->json($messages); // send messages to the client
     }
