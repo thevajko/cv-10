@@ -49,7 +49,7 @@ class Chat {
                 document.getElementById("recipient").value = "";
             } else {
                 // If not show notice
-                this.showNotice("The message can't be sent. The recipient might be not active or an error occurred.");
+                this.showNotice("The message can't be sent. The recipient might be not active or an error occurred.", 'danger');
             }
         }
 
@@ -90,7 +90,7 @@ class Chat {
         }
         // If there is a problem with login
         if (showNotice) {
-            this.showNotice("There were some problems with login!");
+            this.showNotice("Login failed!", 'danger');
         }
         return false;
     }
@@ -177,13 +177,14 @@ class Chat {
     /**
      * Show a notice
      * @param {string} message
+     * @param type type of the alert
      */
-    showNotice(message) {
+    showNotice(message, type = 'alert') {
         // Get an element for notices
         let noticesElement = document.getElementById("notices");
         // Add a new notice at the top of the notices stack
         noticesElement.innerHTML =
-            `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
                 ${message}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
              </div>` + noticesElement.innerHTML;
