@@ -11,6 +11,20 @@ class AuthAPI extends DataService {
 
     /**
      * Check and return current status of the user
+     * @returns {Promise<object|null>} Object with the login attribute, if there is no error
+     */
+    async userStatus() {
+        let response = await this.sendRequest(
+            "status",
+            "POST",
+            200,
+            {},
+            null);
+        return response != null ? response.login : response;
+    }
+
+    /**
+     * Check and return current status of the user
      * @returns {Promise<object|null>} Object with attribute login, if there is no error
      */
     async loggedDetails() {
