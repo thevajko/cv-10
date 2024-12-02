@@ -65,7 +65,7 @@ class Chat {
         // Periodically ask API for new messages and status
         setInterval(
             () => this.checkChanges(),
-            1000
+            2000
         );
 
     }
@@ -146,7 +146,23 @@ class Chat {
     }
 
     /**
-     * Get all messages for the user
+     * Show a notice
+     * @param {string} message
+     * @param type type of the alert
+     */
+    showNotice(message, type = 'alert') {
+        // Get an element for notices
+        let noticesElement = document.getElementById("notices");
+        // Add a new notice at the top of the notices stack
+        noticesElement.innerHTML =
+            `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             </div>` + noticesElement.innerHTML;
+    }
+
+    /**
+     * Show messages
      * @returns {Promise}
      */
     async showMessages() {
@@ -156,7 +172,10 @@ class Chat {
         let tbodyElement = document.getElementById("message_rows");
         // stringHTML will contain a HTML code of all messages
         let stringHTML = "";
-
+        // remember last id (the newest message come as the first one)
+        if (messages.length > 0) {
+            this.#lastId = messages[0].id;
+        }
         // Formatter for a correct date conversion
         let formatter = new Intl.DateTimeFormat('sk-SK', {dateStyle: 'short', timeStyle: 'medium'});
 
@@ -164,8 +183,6 @@ class Chat {
         messages.forEach((message) => {
             // Get a date object
             let date = Date.parse(message.created);
-            // Remember last id
-            this.#lastId = message.id;
             // Is the message private?
             let isPrivate = message.recipient != null;
             // Set the author and the recipient (if the message is private)
@@ -182,24 +199,8 @@ class Chat {
                 `
         });
         // Wrap messages to the table with a header
-
+        console.log(this.#lastId);
         tbodyElement.innerHTML = stringHTML + tbodyElement.innerHTML ;
-    }
-
-    /**
-     * Show a notice
-     * @param {string} message
-     * @param type type of the alert
-     */
-    showNotice(message, type = 'alert') {
-        // Get an element for notices
-        let noticesElement = document.getElementById("notices");
-        // Add a new notice at the top of the notices stack
-        noticesElement.innerHTML =
-            `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
-                ${message}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-             </div>` + noticesElement.innerHTML;
     }
 }
 

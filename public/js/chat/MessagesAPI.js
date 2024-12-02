@@ -32,7 +32,7 @@ class MessagesAPI extends DataService {
      */
     async sendMessage(message, recipient = null) {
         return await this.sendRequest(
-            "sendMessage",
+            "saveMessage",
             "POST",
             204,
             {

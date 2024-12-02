@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Core\HTTPException;
 use App\Core\Model;
 use DateTime;
+use Exception;
 
 class Login extends Model
 {
@@ -44,6 +45,21 @@ class Login extends Model
     }
 
     /** end region */
+
+
+    /**
+     * Set user active (add current timestamp for user in DB table logins)
+     * @param $login
+     * @return void
+     * @throws Exception
+     */
+    public static function setActive($login)
+    {
+        // update datetime of last action for the author
+        $author = Login::getOne($login);
+        $author->setLastAction(new \DateTime());
+        $author->save();
+    }
 
     /**
      * Returns true, if user is active (logged in)
