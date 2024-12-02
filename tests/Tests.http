@@ -260,10 +260,10 @@ Cookie: {{session2}}
 %}
 
 ###
-# @name = sendMessage - bad input message from user1 session, NO-COOKIE
+# @name = saveMessage - bad input message from user1 session, NO-COOKIE
 # Sending message with bad parameters
 #@no-cookie-jar
-POST http://localhost:80/?c=messageApi&a=sendMessage
+POST http://localhost:80/?c=messageApi&a=saveMessage
 Content-Type: application/json
 Accept: application/json
 Cookie: {{session1}}
@@ -281,9 +281,9 @@ Cookie: {{session1}}
 %}
 
 ###
-# @name = sendMessage - message from user1 session with bad values, NO-COOKIE
+# @name = saveMessage - message from user1 session with bad values, NO-COOKIE
 #@no-cookie-jar
-POST http://localhost:80/?c=messageApi&a=sendMessage
+POST http://localhost:80/?c=messageApi&a=saveMessage
 Content-Type: application/json
 Accept: application/json
 Cookie: {{session1}}
@@ -301,7 +301,7 @@ Cookie: {{session1}}
 %}
 
 ###
-# @name = sendMessage - public message with randomly generated text user2 session, NO-COOKIE
+# @name = saveMessage - public message with randomly generated text user2 session, NO-COOKIE
 #@no-cookie-jar
 < {%
     function generateString(length) {
@@ -319,7 +319,7 @@ Cookie: {{session1}}
 
 %}
 
-POST http://localhost:80/?c=messageApi&a=sendMessage
+POST http://localhost:80/?c=messageApi&a=saveMessage
 Content-Type: application/json
 Accept: application/json
 Cookie: {{session2}}
@@ -338,9 +338,9 @@ Cookie: {{session2}}
 
 
 ###
-# @name = sendMessage - Try to send message not logged in, NO-COOKIE
+# @name = saveMessage - Try to send message not logged in, NO-COOKIE
 #@no-cookie-jar
-POST http://localhost:80/?c=messageApi&a=sendMessage
+POST http://localhost:80/?c=messageApi&a=saveMessage
 Content-Type: application/json
 Accept: application/json
 Cookie:
@@ -358,9 +358,9 @@ Cookie:
 %}
 
 ###
-# @name = sendMessage - Try to send message to not logged or inactive user, NO-COOKIE
+# @name = saveMessage - Try to send message to not logged or inactive user, NO-COOKIE
 #@no-cookie-jar
-POST http://localhost:80/?c=messageApi&a=sendMessage
+POST http://localhost:80/?c=messageApi&a=saveMessage
 Content-Type: application/json
 Accept: application/json
 Cookie: {{session1}}
@@ -378,9 +378,9 @@ Cookie: {{session1}}
 %}
 
 ###
-# @name = sendMessage - User 1 sending private message to user 2, NO-COOKIE
+# @name = saveMessage - User 1 sending private message to user 2, NO-COOKIE
 #@no-cookie-jar
-POST http://localhost:80/?c=messageApi&a=sendMessage
+POST http://localhost:80/?c=messageApi&a=saveMessage
 Content-Type: application/json
 Accept: application/json
 Cookie: {{session1}}
@@ -398,9 +398,9 @@ Cookie: {{session1}}
 %}
 
 ###
-# @name = sendMessage - Send another message for next tests user2, NO-COOKIE
+# @name = saveMessage - Send another message for next tests user2, NO-COOKIE
 #@no-cookie-jar
-POST http://localhost:80/?c=messageApi&a=sendMessage
+POST http://localhost:80/?c=messageApi&a=saveMessage
 Content-Type: application/json
 Accept: application/json
 Cookie: {{session2}}
@@ -418,9 +418,9 @@ Cookie: {{session2}}
 %}
 
 ###
-# @name = sendMessage - Send another message for next tests user1, NO-COOKIE
+# @name = saveMessage - Send another message for next tests user1, NO-COOKIE
 #@no-cookie-jar
-POST http://localhost:80/?c=messageApi&a=sendMessage
+POST http://localhost:80/?c=messageApi&a=saveMessage
 Content-Type: application/json
 Accept: application/json
 Cookie: {{session1}}
