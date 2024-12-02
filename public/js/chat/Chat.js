@@ -166,7 +166,28 @@ class Chat {
      * @returns {Promise}
      */
         async showMessages() {
-            // TODO Implement this method
+            let messages = await this.#messageService.getMessages(this.#lastId);
+            let tbodyElement = document.getElementById("message_rows");
+            let stringHTML = "";
+            if (messages.length > 0) {
+                this.#lastId = messages[0].id;
+            }
+            let formatter = new Intl.DateTimeFormat('sk-SK', {dateStyle: 'short', timeStyle: 'medium'});
+
+            messages.forEach((message) => {
+                let date = Date.parse(message.created);
+                let isPrivate = message.recipient != null;
+                let to = isPrivate ? message.author + " => " + message.recipient : message.author;
+                let privateClass = isPrivate ? "table-primary" : "";
+                stringHTML += `
+                <tr class="${privateClass}">
+                    <td style="width:15%">${formatter.format(date)}</td>
+                    <td style="width:15%">${to}</td>
+                    <td>${message.message}</td>
+                </tr>
+                `
+            });
+            tbodyElement.innerHTML = stringHTML + tbodyElement.innerHTML ;
         }
 }
 
