@@ -171,30 +171,19 @@ class Chat {
      * @returns {Promise}
      */
     async showMessages() {
-        // Get all messages
         let messages = await this.#messageService.getMessages(this.#lastId);
-        // Get an element where to put all messages
         let tbodyElement = document.getElementById("message_rows");
-        // stringHTML will contain a HTML code of all messages
         let stringHTML = "";
-        // remember last id (the newest message come as the first one)
         if (messages.length > 0) {
             this.#lastId = messages[0].id;
         }
-        // Formatter for a correct date conversion
         let formatter = new Intl.DateTimeFormat('sk-SK', {dateStyle: 'short', timeStyle: 'medium'});
 
-        // Iterate through the messages
         messages.forEach((message) => {
-            // Get a date object
             let date = Date.parse(message.created);
-            // Is the message private?
             let isPrivate = message.recipient != null;
-            // Set the author and the recipient (if the message is private)
             let to = isPrivate ? message.author + " => " + message.recipient : message.author;
-            // Set the CSS class to highlight line with private message
-            let privateClass = isPrivate ? "table-primary" : "";
-            // One message per table row
+            let privateClass = isPrivate ? "table-warning" : "";
             stringHTML += `
                 <tr class="${privateClass}">
                     <td style="width:15%">${formatter.format(date)}</td>
@@ -204,7 +193,6 @@ class Chat {
                 `
         });
         // Wrap messages to the table with a header
-        console.log(this.#lastId);
         tbodyElement.innerHTML = stringHTML + tbodyElement.innerHTML;
     }
 }
