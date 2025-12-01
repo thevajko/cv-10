@@ -24,7 +24,7 @@ class Chat {
      */
     #lastId = 0;
 
-    constructor(elementId) {
+    constructor() {
 
         this.#authService = new AuthAPI();
         this.#messageService = new MessagesAPI();

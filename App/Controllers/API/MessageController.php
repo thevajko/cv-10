@@ -104,11 +104,11 @@ class MessageController extends BaseController
 
 
         // get all messages, where user is the recipient or the author
-        $messages = Message::getAll("id >= ? AND (recipient is NULL OR recipient = ? OR author = ?)", [
+        $messages = Message::getAll("id > ? AND (recipient is NULL OR recipient = ? OR author = ?)", [
             $lastId,
             $this->user->getName(),
             $this->user->getName()
-        ]);
+        ], 'id DESC');
 
         // update datetime of last action for the author
         $author = User::getOne($this->user->getName());
