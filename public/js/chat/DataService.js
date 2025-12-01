@@ -37,7 +37,37 @@ class DataService {
      * @returns {Promise<any|any>} Return Promise, because this method uses fetch method
      */
     async sendRequest(action, method, responseCode, body, onErrorReturn = null) {
-        // TODO Implement this method
+        try {
+            const options = {
+                method: method,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+
+            // len pri metódach s telom
+            if (body && method.toUpperCase() !== "GET" && method.toUpperCase() !== "HEAD") {
+                options.body = JSON.stringify(body);
+            }
+
+            const response = await fetch(this.#url(action), options);
+
+            // ak status nie je očakávaný, vyhoď výnimku s onErrorReturn
+            if (response.status !== Number(responseCode)) {
+                throw onErrorReturn;
+            }
+
+            // 204 - No Content -> vráť true
+            if (response.status === 204) {
+                return true;
+            }
+
+            // inak sa očakávajú dáta -> vráť ich
+            return await response.json();
+        } catch (e) {
+            // pri chybe vyhoď výnimku s hodnotou onErrorReturn
+            throw onErrorReturn;
+        }
     }
 }
 
