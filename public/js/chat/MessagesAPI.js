@@ -6,7 +6,7 @@ import {DataService} from "./DataService.js";
 class MessagesAPI extends DataService {
 
     constructor() {
-        super("messageApi");
+        super("api/message");
     }
 
     /**
@@ -15,7 +15,13 @@ class MessagesAPI extends DataService {
      * @returns {Promise<Array<Object>>}
      */
     async getMessages(lastID = null) {
-        // TODO Implement this method
+        let lastIdString = lastID == null ? "" : "&lastId=" + lastID;
+        return await this.sendRequest(
+            "getAllMessages" + lastIdString,
+            "POST",
+            200,
+            null,
+            []);
     }
 
     /**
@@ -25,7 +31,15 @@ class MessagesAPI extends DataService {
      * @returns {Promise<boolean>} true if message was sent
      */
     async sendMessage(message, recipient = null) {
-        // TODO Implement this method
+        return await this.sendRequest(
+            "receiveMessage",
+            "POST",
+            204,
+            {
+                'recipient': recipient,
+                'message': message
+            },
+            false);
     }
 }
 

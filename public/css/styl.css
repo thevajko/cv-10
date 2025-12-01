@@ -5,3 +5,7 @@
 .navbar-brand img {
     width: 50px;
 }
+
+#active ul li {
+    cursor: pointer;
+}

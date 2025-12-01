@@ -1,5 +1,5 @@
 /**
- * This is the class containing all methods for web API calling.
+ * Class contains methods for calling web API
  */
 class DataService {
 
@@ -7,7 +7,7 @@ class DataService {
      * Base url of the web API
      * @type {string}
      */
-    #baseUrl = "http://localhost"
+    #baseUrl = "http://localhost/"
     /**
      * Prefix of target controller
      * @type {string}
@@ -23,7 +23,7 @@ class DataService {
      * @param {string} action
      * @returns {string} URL
      */
-    #url(action) {
+    #url(action){
         return this.#baseUrl + "?c=" + this.#controller + "&a=" + action;
     }
 
@@ -33,11 +33,35 @@ class DataService {
      * @param {string} method HTTP method (POST, GET etc.)
      * @param {number|string} responseCode Expected HTTP response code
      * @param {object} body  Parameters to be sent to the action
-     * @param onErrorReturn If there is an error, return this value
+     * @param onErrorReturn If there will be an error in request processing, return this value
      * @returns {Promise<any|any>} Return Promise, because this method uses fetch method
      */
     async sendRequest(action, method, responseCode, body, onErrorReturn = null) {
-        // TODO Implement this method
+        // Use exceptions to wrap the fetch call
+        try {
+            // Bild up fetch and wait for response
+            let response = await fetch(
+                this.#url(action), // URL to the action
+                {
+                    method: method,
+                    body: JSON.stringify(body),
+                    headers: { // Set headers for JSON communication
+                        "Content-type": "application/json", // Send JSON
+                        "Accept" : "application/json", // Accept only JSON as response
+                    }
+                });
+            // If return code do not match our expected value throw error
+            if (response.status !== responseCode ) return onErrorReturn;
+
+            // If the response is empty (HTTP 204 No content), it's ok
+            if (response.status === 204) return true;
+
+            // Everything is ok, send the response
+            return await response.json();
+        } catch(ex) {
+            // On any error just return error
+            return onErrorReturn;
+        }
     }
 }
 

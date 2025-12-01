@@ -6,7 +6,7 @@ import {DataService} from "./DataService.js";
 class AuthAPI extends DataService {
 
     constructor() {
-        super("authApi");
+        super("api/auth");
     }
 
     /**

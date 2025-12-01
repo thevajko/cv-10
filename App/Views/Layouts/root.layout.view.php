@@ -3,6 +3,9 @@
 /** @var string $contentHTML */
 /** @var \Framework\Auth\AppUser $user */
 /** @var \Framework\Support\LinkGenerator $link */
+
+use App\Configuration;
+
 ?>
 <!DOCTYPE html>
 <html lang="sk">
@@ -20,33 +23,25 @@
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<?= $link->asset('css/styl.css') ?>">
-    <script src="<?= $link->asset('js/script.js') ?>"></script>
+    <script src="<?= $link->asset('js/script.js') ?>" type="module" defer></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="<?= $link->url('home.index') ?>">
-            <img src="<?= $link->asset('images/vaiicko_logo.png') ?>" title="<?= App\Configuration::APP_NAME ?>" alt="Framework Logo">
+        <a class="navbar-brand" href="<?= $link->url("home.index") ?>">
+            <img src="<?= $link->asset('images/vaiicko_logo.png') ?>" title="<?= Configuration::APP_NAME ?>">
         </a>
-        <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="<?= $link->url('home.contact') ?>">Contact</a>
-            </li>
-        </ul>
-        <?php if ($user->isLoggedIn()) { ?>
-            <span class="navbar-text">Logged in user: <b><?= $user->getName() ?></b></span>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= $link->url('auth.logout') ?>">Log out</a>
-                </li>
-            </ul>
-        <?php } else { ?>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= App\Configuration::LOGIN_URL ?>">Log in</a>
-                </li>
-            </ul>
-        <?php } ?>
+        <div class="me-0">
+            <div id="user-logged" style="display: none">
+                Logged as <span style="font-weight: bold"></span>
+                <button id="btn-logout">Logout</button>
+            </div>
+            <div id="user-not-logged" style="display: none">
+                Login: <input type="text" id="login">
+                Password: <input type="password" id="password">
+                <button id="btn-login">Login</button>
+            </div>
+        </div>
     </div>
 </nav>
 <div class="container-fluid mt-3">
