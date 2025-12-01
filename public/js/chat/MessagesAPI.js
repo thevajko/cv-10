@@ -31,7 +31,15 @@ class MessagesAPI extends DataService {
      * @returns {Promise<boolean>} true if message was sent
      */
     async sendMessage(message, recipient = null) {
-        // TODO Implement this method
+        return await this.sendRequest(
+            "receiveMessage",
+            "POST",
+            204,
+            {
+                'recipient': recipient,
+                'message': message
+            },
+            false);
     }
 }
 
