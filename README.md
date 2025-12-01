@@ -10,8 +10,8 @@ možné poslať konkrétnemu adresátovi a navyše len tomu, ktorý je aktívny 
 
 1. Dáta pre aplikáciu sme vytvorili na predošlom cvičení. Spustite všetky testy, aby ste sa presvedčili, že _backend_
    aplikácie je plne funkčný.
-2. Pozrite si súbory `App\Views\Home\index.view.php` a všetky súbory v adresári `public\js`. Aplikáciu sme čiastočne
-   vytvorili, pretože jej rozsah nie je možné zvládnuť počas jedného cvičenia.
+2. Pozrite si súbory `App\Views\Home\index.view.php`, `App/Views/Layouts/root.layout.view.php` a všetky súbory v adresári `public\js`.  
+   Aplikáciu sme čiastočne vytvorili, pretože jej rozsah nie je možné zvládnuť počas jedného cvičenia.
 3. Vašou úlohou bude implementovať chýbajúce metódy v JS triedach `DataService`, `MessagesAPI` a `Chat`.
     1. Začnite metódou `sendRequest()` v triede `DataService`. Jej úlohou je komunikovať s backend časťou aplikácie.
        Metóda bude slúžiť na:

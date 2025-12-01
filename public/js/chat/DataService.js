@@ -14,8 +14,8 @@ class DataService {
      */
     #controller;
 
-    constructor(controler) {
-        this.#controller = controler;
+    constructor(controller) {
+        this.#controller = controller;
     }
 
     /**
@@ -32,7 +32,7 @@ class DataService {
      * @param {string} action Action in service controller
      * @param {string} method HTTP method (POST, GET etc.)
      * @param {number|string} responseCode Expected HTTP response code
-     * @param {object} body  Parameters to be sent to the action
+     * @param {object} body Parameters to be sent to the action
      * @param onErrorReturn If there is an error, return this value
      * @returns {Promise<any|any>} Return Promise, because this method uses fetch method
      */
