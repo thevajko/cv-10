@@ -14,8 +14,8 @@ class DataService {
      */
     #controller;
 
-    constructor(controler) {
-        this.#controller = controler;
+    constructor(controller) {
+        this.#controller = controller;
     }
 
     /**
@@ -39,13 +39,14 @@ class DataService {
     async sendRequest(action, method, responseCode, body, onErrorReturn = null) {
         // Use exceptions to wrap the fetch call
         try {
-            // Bild up fetch and wait for response
+            // Build up fetch and wait for response
             let response = await fetch(
                 this.#url(action), // URL to the action
                 {
                     method: method,
                     body: JSON.stringify(body),
                     headers: { // Set headers for JSON communication
+                        'X-Requested-With': 'XMLHttpRequest' , // Indicate AJAX request
                         "Content-type": "application/json", // Send JSON
                         "Accept" : "application/json", // Accept only JSON as response
                     }

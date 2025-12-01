@@ -116,6 +116,22 @@ class Chat {
     }
 
     /**
+     * Show a notice
+     * @param {string} message
+     * @param type type of the alert
+     */
+    showNotice(message, type = 'alert') {
+        // Get an element for notices
+        let noticesElement = document.getElementById("notices");
+        // Add a new notice at the top of the notices stack
+        noticesElement.innerHTML =
+            `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             </div>` + noticesElement.innerHTML;
+    }
+
+    /**
      * Gets and show active users
      * @returns {Promise<void>}
      */
@@ -146,28 +162,12 @@ class Chat {
     }
 
     /**
-     * Show a notice
-     * @param {string} message
-     * @param type type of the alert
-     */
-    showNotice(message, type = 'alert') {
-        // Get an element for notices
-        let noticesElement = document.getElementById("notices");
-        // Add a new notice at the top of the notices stack
-        noticesElement.innerHTML =
-            `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
-                ${message}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-             </div>` + noticesElement.innerHTML;
-    }
-
-    /**
      * Show messages
      * @returns {Promise}
      */
     async showMessages() {
         // Get all messages
-        let messages = await this.#messageService.getMessages(this.#lastId);
+        let messages = await this.#messageService.getAllMessages(this.#lastId);
         // Get an element where to put all messages
         let tbodyElement = document.getElementById("message_rows");
         // stringHTML will contain a HTML code of all messages
