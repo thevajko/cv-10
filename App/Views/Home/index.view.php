@@ -1,38 +1,36 @@
-<?php
-
-/** @var \Framework\Support\LinkGenerator $link */
-?>
-
 <div class="container-fluid">
     <div class="row">
-        <div class="col mt-5">
-            <div class="text-center">
-                <h2>Vaííčko MVC FW</h2>
-                <h3>Version <?= App\Configuration::FW_VERSION ?></h3>
-                <img src="<?= $link->asset('images/vaiicko_logo.png') ?>" alt="Framework Logo">
-                <p>
-                    Congratulations, you have successfully installed and run the framework
-                    <strong>Vaííčko</strong> <?= App\Configuration::FW_VERSION ?>!<br>
-                    We hope that you will create a great application using this framework.<br>
-                </p>
-                <p>
-                    This simple framework was created for teaching purposes and to better understand how the MVC
-                    architecture works.<br>
-                    It is intended for students of the subject <em>web application development</em>, but not only
-                    for them.
-                </p>
-            </div>
+        <div class="col text-center mb-3">
+            <h3>Chat App</h3>
         </div>
     </div>
-    <div class="row mt-3">
-        <div class="col text-center">
-            <h4>Authors</h4>
-            <div>
-                <a href="mailto:Patrik.Hrkut@fri.uniza.sk">doc. Ing. Patrik Hrkút, PhD.</a><br>
-                <a href="mailto:Michal.Duracik@fri.uniza.sk">Ing. Michal Ďuračík, PhD.</a><br>
-                <a href="mailto:Matej.Mesko@fri.uniza.sk">Ing. Matej Meško, PhD.</a><br><br>
-                &copy; 2020-<?= date('Y') ?> University of Žilina, Faculty of Management Science and Informatics,
-                Department of Software Technologies
+    <div id="notices"></div>
+    <div class="row">
+        <div class="col-2">
+            <div id="active" style="display: none">
+                <h3>Online users:</h3>
+                <ul></ul>
+            </div>
+        </div>
+        <div class="col-10" id="chat" style="display: none">
+            <div class="mb-3">
+                <label for="recipient">To:</label> <input type="text" id="recipient">
+                <label for="message">Message:</label> <input type="text" id="message" size="80">
+                <button id="btn-send">Send</button>
+            </div>
+            <h3>Messages:</h3>
+            <div id="messages">
+                <table class="table table-sm table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Date and time</th>
+                        <th>From (=>to)</th>
+                        <th>Message</th>
+                    </tr>
+                    </thead>
+                    <tbody id="message_rows">
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
