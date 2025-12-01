@@ -24,7 +24,7 @@ class Chat {
      */
     #lastId = 0;
 
-    constructor(elementId) {
+    constructor() {
 
         this.#authService = new AuthAPI();
         this.#messageService = new MessagesAPI();
@@ -65,7 +65,7 @@ class Chat {
         // Periodically ask API for new messages and status
         setInterval(
             () => this.checkChanges(),
-            2000
+            1000
         );
 
     }
@@ -200,7 +200,7 @@ class Chat {
         });
         // Wrap messages to the table with a header
         console.log(this.#lastId);
-        tbodyElement.innerHTML = stringHTML + tbodyElement.innerHTML ;
+        tbodyElement.innerHTML = stringHTML + tbodyElement.innerHTML;
     }
 }
 

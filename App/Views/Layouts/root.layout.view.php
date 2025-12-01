@@ -29,7 +29,7 @@ use App\Configuration;
 <nav class="navbar navbar-expand-sm bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="<?= $link->url("home.index") ?>">
-            <img src="<?= $link->asset('images/vaiicko_logo.png') ?>" title="<?= Configuration::APP_NAME ?>">
+            <img src="<?= $link->asset('images/vaiicko_logo.png') ?>" title="<?= Configuration::APP_NAME ?> Logo" alt="Framework Logo">
         </a>
         <div class="me-0">
             <div id="user-logged" style="display: none">
@@ -37,8 +37,8 @@ use App\Configuration;
                 <button id="btn-logout">Logout</button>
             </div>
             <div id="user-not-logged" style="display: none">
-                Login: <input type="text" id="login">
-                Password: <input type="password" id="password">
+                <label for="login">Login:</label> <input type="text" id="login">
+                <label for="password">Password:</label>Password: <input type="password" id="password">
                 <button id="btn-login">Login</button>
             </div>
         </div>

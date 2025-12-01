@@ -1,20 +1,18 @@
-VAII Cvičenie 10
+# VAII Cvičenie 10
 
-Momentálne je otvorená vetva __MAIN__, ktorá obsahuje _štartér_. Riešenie obsahuje vetva __SOLUTION__.
+Momentálne je otvorená vetva __SOLUTION__, ktorá obsahuje _riešenie_. _Štartér_ obsahuje vetva __MAIN__.
+Ak chcete vyskúšať riešenie, je potrebné v __Docker Desktop__ zmazať _stack_ __vaii_cv10__, aby sa vám správne inicializovala DB.
 
 ## Čet
 
 Vytvorte SPA aplikáciu na četovanie medzi používateľmi. Čítať a posielať správy bude možné až po prihlásení. Poslať sa
-bude dať
-dva druhy správ: verejné a súkromné (privátne). Verejné správy budú vidieť všetci používatelia četu. Privátne správy je
-možné poslať konkrétnemu
-adresátovi a navyše len tomu, ktorý je aktívny (vykonal nejakú činnosť za posledných 30 sekúnd).
+budú dať dva druhy správ: verejné a súkromné (privátne). Verejné správy budú vidieť všetci používatelia četu. Privátne správy je
+možné poslať konkrétnemu adresátovi a navyše len tomu, ktorý je aktívny (vykonal nejakú činnosť za posledných 30 sekúnd).
 
 1. Dáta pre aplikáciu sme vytvorili na predošlom cvičení. Spustite všetky testy, aby ste sa presvedčili, že _backend_
    aplikácie je plne funkčný.
 2. Pozrite si súbory `App\Views\Home\index.view.php` a všetky súbory v adresári `public\js`. Aplikáciu sme čiastočne
-   vytvorili, pretože jej rozsah nie je možné
-   zvládnuť počas jedného cvičenia.
+   vytvorili, pretože jej rozsah nie je možné zvládnuť počas jedného cvičenia.
 3. Vašou úlohou bude implementovať chýbajúce metódy v JS triedach `DataService`, `MessagesAPI` a `Chat`.
     1. Začnite metódou `sendRequest()` v triede `DataService`. Jej úlohou je komunikovať s backend časťou aplikácie.
        Metóda bude slúžiť na:
