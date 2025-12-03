@@ -136,7 +136,29 @@ class Chat {
      * @returns {Promise<void>}
      */
     async showActiveUsers() {
-        // TODO Implement this method
+        // Get list of all active users
+        let active = await this.#authService.getActiveUsers();
+        // Get an element where the list will be created
+        let ulElement = document.getElementById("active").querySelector("ul");
+        // Remove all previous content
+        ulElement.innerHTML = "";
+
+        if (active.length > 0) {
+            // If there are active users, iterate them
+            active.forEach((user) => {
+                // For each user, create a LI element
+                let li = document.createElement("li");
+                // Show user login
+                li.innerText = user.login;
+                // Add onclick handler
+                li.onclick = () => {
+                    // By clicking login in the active user list copy the name to recipient input field
+                    document.getElementById("recipient").value = user.login;
+                }
+                // Append a new list item
+                ulElement.append(li);
+            });
+        }
     }
 
     /**
