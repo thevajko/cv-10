@@ -38,7 +38,7 @@ use App\Configuration;
             </div>
             <div id="user-not-logged" style="display: none">
                 <label for="login">Login:</label> <input type="text" id="login">
-                <label for="password">Password:</label>Password: <input type="password" id="password">
+                <label for="password">Password:</label> <input type="password" id="password">
                 <button id="btn-login">Login</button>
             </div>
         </div>

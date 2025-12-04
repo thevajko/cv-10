@@ -22,7 +22,7 @@ class MessageController extends BaseController
      * @return true only if is user authenticated
      * @throws HttpException
      */
-    public function authorize(Request $request, string $action) : bool
+    public function authorize(Request $request, string $action): bool
     {
         // all actions are available only for logged users
         if ($this->user->isLoggedIn()) {
@@ -37,7 +37,7 @@ class MessageController extends BaseController
      */
     public function index(Request $request): Response
     {
-        throw new HTTPException(501,"Not Implemented");
+        throw new HTTPException(501, "Not Implemented");
     }
 
     /**
@@ -54,14 +54,14 @@ class MessageController extends BaseController
      * @throws HTTPException|JsonException 400 Bad Request if input has bad format or private message is
      * @throws \Exception
      */
-    public function receiveMessage(Request $request) : Response
+    public function receiveMessage(Request $request): Response
     {
         // parse input JSON
         $jsonData = $request->json();
 
         if (
             is_object($jsonData) // an object is expected
-            && property_exists($jsonData, 'recipient') &&  property_exists($jsonData, 'message') // check if object has recipient and message attributes
+            && property_exists($jsonData, 'recipient') && property_exists($jsonData, 'message') // check if object has recipient and message attributes
             && !empty($jsonData->message) // message attribute must not be empty
         ) {
             // create a new message
@@ -78,10 +78,18 @@ class MessageController extends BaseController
                 // set the recipient
                 $message->setRecipient($jsonData->recipient);
             }
+
+            $now = new \DateTime();
+
             // set the rest of the message and save it
-            $message->setCreated(new \DateTime());
+            $message->setCreated($now);
             $message->setMessage($jsonData->message);
             $message->save();
+
+            // update datetime of last action for the author
+            $author = User::getOne($this->user->getName());
+            $author->setLastAction($now);
+            $author->save();
 
             // there is no data to be sent to the client
             return new EmptyResponse();
@@ -110,10 +118,6 @@ class MessageController extends BaseController
             $this->user->getName()
         ], 'id DESC');
 
-        // update datetime of last action for the author
-        $author = User::getOne($this->user->getName());
-        $author->setLastAction(new \DateTime());
-        $author->save();
 
         return $this->json($messages); // send messages to the client
     }
